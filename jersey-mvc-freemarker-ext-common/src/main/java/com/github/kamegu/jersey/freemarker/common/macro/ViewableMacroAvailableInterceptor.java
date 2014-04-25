@@ -53,9 +53,8 @@ public class ViewableMacroAvailableInterceptor implements WriterInterceptor {
             final Viewable viewable = (Viewable) entity;
             Object model = viewable.getModel();
             if (!(model instanceof Map)) {
-                model = new HashMap<String, Object>() {{
-                    put("model", viewable.getModel());
-                }};
+                model = new HashMap<String, Object>();
+                ((Map<String, Object>) model).put("model", viewable.getModel());
             }
             Map<String, Object> map = (Map<String, Object>) model;
             setHttpContext(map, httpServletRequest);
