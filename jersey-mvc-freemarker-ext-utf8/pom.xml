@@ -4,10 +4,10 @@
     <parent>
         <groupId>com.github.kamegu</groupId>
         <artifactId>jersey-mvc-freemarker-extension</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
     <artifactId>jersey-mvc-freemarker-ext-utf8</artifactId>
-    <version>0.0.1-for2.5.1</version>
+    <version>0.0.2-SNAPSHOT-for2.5.1</version>
     <packaging>jar</packaging>
 
     <dependencies>

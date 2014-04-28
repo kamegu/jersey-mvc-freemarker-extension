@@ -4,7 +4,7 @@
 
     <groupId>com.github.kamegu</groupId>
     <artifactId>jersey-mvc-freemarker-extension</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>jersey-mvc-freemarker-extension</name>
     <description>
@@ -17,7 +17,7 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <freemarker.version>2.3.20</freemarker.version>
-        <internal.repo.directory>D:\dev\mvn-repo</internal.repo.directory>
+        <github.global.server>github-kamegu</github.global.server>
     </properties>
     <licenses>
         <license>
@@ -35,10 +35,10 @@
     </dependencies>
 
     <distributionManagement>
-        <repository>
+        <repository>1
             <id>internal.repo</id>
             <name>Temporary Staging Repository</name>
-            <url>file://${internal.repo.directory}</url>
+            <url>file://${project.build.directory}/mvn-repo</url>
         </repository>
     </distributionManagement>    
     <build>
@@ -68,6 +68,34 @@
                       <goals>
                         <goal>jar</goal>
                       </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.9</version>
+                <configuration>
+                    <merge>true</merge>
+                    <message>Maven artifacts for ${project.version}</message>
+                    <!-- Jekyllという静的ページを生成するツールは無効 -->
+                    <noJekyll>true</noJekyll>
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <!-- GitHubリポジトリ名 -->
+                    <repositoryName>mvn-repo</repositoryName>
+                    <!-- GitHubユーザ名  -->
+                    <repositoryOwner>kamegu</repositoryOwner>
+                </configuration>
+                <executions>
+                    <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
                     </execution>
                 </executions>
             </plugin>
